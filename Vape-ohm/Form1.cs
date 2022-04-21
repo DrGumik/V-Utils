@@ -1,11 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿/// <summary>
+/// 
+/// Created by Jakub Tenk
+/// 
+/// Simple program V-Utils for DIY vaping in CZ lang.
+///  - Ohm meter calculator (include power, current consumation and battery test calculation)
+///  - Nicotine calculator
+///  - Base ratio
+///  
+/// </summary>
+
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Vape_ohm
@@ -17,103 +22,65 @@ namespace Vape_ohm
             InitializeComponent();
         }
 
-        private void btn1_Click(object sender, EventArgs e)
+        private void btn_OhmMeter_Click(object sender, EventArgs e)
         {
-            int voltsw = tb1.Value;
-
-            double volt = 3.2;
-            double amp = double.Parse(tbA.Text.ToString());
-            double ohm = double.Parse(tbO.Text.ToString());
-            double AB, W;
-
-            switch (voltsw)
+            if (tb_BatteryMaxCurrent.Text.ToString() == "" || tb_Ohm.Text.ToString() == "")
             {
-                case 0:
-                    volt = 3.2;
-                    break;
-                case 1:
-                    volt = 3.3;
-                    break;
-                case 2:
-                    volt = 3.4;
-                    break;
-                case 3:
-                    volt = 3.5;
-                    break;
-                case 4:
-                    volt = 3.6;
-                    break;
-                case 5:
-                    volt = 3.7;
-                    break;
-                case 6:
-                    volt = 3.8;
-                    break;
-                case 7:
-                    volt = 3.9;
-                    break;
-                case 8:
-                    volt = 4.0;
-                    break;
-                case 9:
-                    volt = 4.1;
-                    break;
-                case 10:
-                    volt = 4.2;
-                    break;
+                MessageBox.Show("Vložte parametry baterie a odpor spirálky");
+                return;
             }
 
-            AB = volt / ohm;
-            W = volt * AB;
-            tbAB.Text = AB.ToString("0.000");
-            tbW.Text = W.ToString("0.000");
-            if (amp > AB)
+            double maxCurrent = double.Parse(tb_BatteryMaxCurrent.Text.ToString());
+            double ohm = double.Parse(tb_Ohm.Text.ToString());
+            double voltage = 3.2 + 0.1 * tb_BatteryVoltage.Value;
+            double current, power;
+            
+            current = voltage / ohm;
+            power = voltage * current;
+            tb_BatteryOutCurrent.Text = current.ToString("0.000");
+            tb_Power.Text = power.ToString("0.000");
+
+            if (maxCurrent > current)
             {
-                lbl9.ForeColor = Color.ForestGreen;
-                lbl9.Text = "Kontrola baterie: Baterie je dostatečná!";
+                lbl_BatteryTest.ForeColor = Color.ForestGreen;
+                lbl_BatteryTest.Text = "Kontrola baterie: Baterie je dostatečná!";
             }
-            if (amp < AB)
+            if (maxCurrent < current)
             {
-                lbl9.ForeColor = Color.Red;
-                lbl9.Text = "Kontrola baterie: Baterie je nedostatečná!";
+                lbl_BatteryTest.ForeColor = Color.Red;
+                lbl_BatteryTest.Text = "Kontrola baterie: Baterie je nedostatečná!";
             }
-            if (amp == AB)
+            if (maxCurrent == current)
             {
-                lbl9.ForeColor = Color.Orange;
-                lbl9.Text = "Kontrola baterie: Baterie je dostatečná, ale s omezením!";
+                lbl_BatteryTest.ForeColor = Color.Orange;
+                lbl_BatteryTest.Text = "Kontrola baterie: Baterie je dostatečná, ale s omezením!";
             }
         }
 
         private void tbOhm_KeyBlock(object sender, KeyPressEventArgs e)
         {
-            string test = e.KeyChar.ToString();
-            if ("." == test)
-            {
-                //MessageBox.Show("Znak tečka je zakázán. Použij čárku!");
+            if ("." == e.KeyChar.ToString())
                 e.Handled = true;
-            }
-            else 
-            {
+            else
                 e.Handled = false;
-            }
         }
 
         private void tbA_KeyBlock(object sender, KeyPressEventArgs e)
         {
-            string test = e.KeyChar.ToString();
-            if ("." == test)
-            {
-                //MessageBox.Show("Znak tečka je zakázán. Použij čárku!");
-                e.Handled = true;                
-            }
+            if ("." == e.KeyChar.ToString())
+                e.Handled = true;
             else
-            {
                 e.Handled = false;
-            }            
         }
 
-        private void btn2_Click(object sender, EventArgs e)
+        private void btn_NicotineCalculator_Click(object sender, EventArgs e)
         {
+            if (tbONB.Text.ToString() == "" || tbPON.Text.ToString() == "" || tbMMB.Text.ToString() == "")
+            {
+                MessageBox.Show("Vložte parametry do nikotinové kalkulačky");
+                return;
+            }
+
             double nikotinbooster = double.Parse(tbONB.Text.ToString());
             double nikotin = double.Parse(tbPON.Text.ToString());
             double juicebase = double.Parse(tbMMB.Text.ToString());
@@ -126,8 +93,14 @@ namespace Vape_ohm
 
         }
 
-        private void btn3_Click(object sender, EventArgs e)
+        private void btn_BaseCalculator_Click(object sender, EventArgs e)
         {
+            if (tbVG.Text.ToString() == "" || tbPG.Text.ToString() == "")
+            {
+                MessageBox.Show("Vložte parametry báze");
+                return;
+            }
+
             double vg = double.Parse(tbVG.Text.ToString());
             double pg = double.Parse(tbPG.Text.ToString());
             double a,b,c;

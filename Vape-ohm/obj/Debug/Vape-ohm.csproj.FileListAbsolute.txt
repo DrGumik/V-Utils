@@ -16,3 +16,12 @@ D:\Programovani\V-Utils WFA\Vape-ohm\obj\Debug\Vape_ohm.Properties.Resources.res
 D:\Programovani\V-Utils WFA\Vape-ohm\obj\Debug\Vape-ohm.csproj.GenerateResource.cache
 D:\Programovani\V-Utils WFA\Vape-ohm\obj\Debug\Vape-ohm.exe
 D:\Programovani\V-Utils WFA\Vape-ohm\obj\Debug\Vape-ohm.pdb
+D:\Programovani\v-utils\Vape-ohm\bin\Debug\Vape-ohm.exe.config
+D:\Programovani\v-utils\Vape-ohm\bin\Debug\Vape-ohm.exe
+D:\Programovani\v-utils\Vape-ohm\bin\Debug\Vape-ohm.pdb
+D:\Programovani\v-utils\Vape-ohm\obj\Debug\Vape-ohm.csprojAssemblyReference.cache
+D:\Programovani\v-utils\Vape-ohm\obj\Debug\Vape_ohm.Form1.resources
+D:\Programovani\v-utils\Vape-ohm\obj\Debug\Vape_ohm.Properties.Resources.resources
+D:\Programovani\v-utils\Vape-ohm\obj\Debug\Vape-ohm.csproj.GenerateResource.cache
+D:\Programovani\v-utils\Vape-ohm\obj\Debug\Vape-ohm.exe
+D:\Programovani\v-utils\Vape-ohm\obj\Debug\Vape-ohm.pdb
